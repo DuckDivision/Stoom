@@ -16,6 +16,7 @@
               value="Matvej Baranov"
               class="w-full py-1 px-2 bg-blue-100"
               disabled
+              ref='user'
             />
           </div>
           <div
@@ -28,6 +29,7 @@
                 value="DuckDivision"
                 class="w-full py-1 px-2 bg-blue-100"
                 disabled
+                
               />
             </div>
             <div class="w-full">
@@ -93,9 +95,29 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem natus nobis odi
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: "stoom-profile-information",
-  props: {},
-  methods: {},
+  data() {
+    return {
+      User: []
+    };
+  },
+  mounted() {
+    axios
+      .get("http://localhost:8081/stoom/user/", {
+        params: {
+          userName: sessionStorage.getItem("user")
+        },
+        headers: {
+          authorization: sessionStorage.getItem("authorization")
+        }
+      })
+      .then(response => {
+        console.log(response.data);
+        this.User = response.data;
+        this.$refs.user.value = sessionStorage.getItem('user');
+      });
+  }
 };
 </script>
