@@ -134,7 +134,7 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Starcraft 3</span>
+              <span class="text-lg">Starcraft 5</span>
               <span class="text-right pr-2">499р</span>
               <span class="text-sm">Game by Blizzard</span>
               <router-link to="/gamePage" class="flex flex-row-reverse"
