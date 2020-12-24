@@ -39,7 +39,7 @@
                 Settings
               </button>
               <button
-                v-show="isAdmin"
+                v-if="isAdmin()"
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
                 @click="displayGame"
@@ -47,7 +47,7 @@
                 Add new game
               </button>
               <button
-                v-show="isAdmin"
+                v-if="isAdmin()"
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
                 @click="displayPromotion"
@@ -99,34 +99,36 @@ export default {
       isSettingsVisible: false,
       isGameVisible: false,
       isPromotionVisible: false,
-      isAdmin: sessionStorage.getItem('role') == 'ROLE_ADMIN'
     };
   },
   methods: {
-    displayInformation: function() {
-      isInformationVisible = true;
-      isSettingsVisible = false;
-      isGameVisible = false;
-      isPromotionVisible = false;
+    displayInformation() {
+      this.$data.isInformationVisible = true;
+      this.$data.isSettingsVisible = false;
+      this.$data.isGameVisible = false;
+      this.$data.isPromotionVisible = false;
     },
-    displaySettings: function() {
-      isInformationVisible = false;
-      isSettingsVisible = true;
-      isGameVisible = false;
-      isPromotionVisible = false;
+    displaySettings() {
+      this.$data.isInformationVisible = false;
+      this.$data.isSettingsVisible = true;
+      this.$data.isGameVisible = false;
+      this.$data.isPromotionVisible = false;
     },
-    displayGame: function() {
-      isInformationVisible = false;
-      isSettingsVisible = false;
-      isGameVisible = true;
-      isPromotionVisible = false;
+    displayGame() {
+      this.$data.isInformationVisible = false;
+      this.$data.isSettingsVisible = false;
+      this.$data.isGameVisible = true;
+      this.$data.isPromotionVisible = false;
     },
-    displayPromotion: function() {
-      isInformationVisible = false;
-      isSettingsVisible = false;
-      isGameVisible = false;
-      isPromotionVisible = true;
+    displayPromotion() {
+      this.$data.isInformationVisible = false;
+      this.$data.isSettingsVisible = false;
+      this.$data.isGameVisible = false;
+      this.$data.isPromotionVisible = true;
     },
+    isAdmin() {
+      return sessionStorage.getItem('role') == 'ROLE_ADMIN';
+    }
   },
   mounted() {
     axios
