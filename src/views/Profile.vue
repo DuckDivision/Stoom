@@ -27,38 +27,30 @@
               <button
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
-                
-                @click="isInformationVisible = !isInformationVisible "
+                @click="displayInformation"
               >
                 Information
               </button>
               <button
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
-                
-                @click="isSettingsVisible = !isSettingsVisible 
-                "
-                
+                @click="displaySettings"
               >
                 Settings
               </button>
               <button
+                v-show="isAdmin"
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
-                ref="hidd"
-                @click="hidBut
-
-                "
+                @click="displayGame"
               >
                 Add new game
               </button>
               <button
+                v-show="isAdmin"
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
-                ref= "hidd1"
-                @click="hidBut
-                "
-                
+                @click="displayPromotion"
               >
                 Promotion
               </button>
@@ -106,19 +98,37 @@ export default {
       isInformationVisible: false,
       isSettingsVisible: false,
       isGameVisible: false,
-      isPromotionVisible: false
+      isPromotionVisible: false,
+      isAdmin: sessionStorage.getItem('role') == 'ROLE_ADMIN'
     };
   },
   methods: {
-    hidBut(){
-      if (sessionStorage.getItem("role") != "ROLE_ADMIN"){
-      this.$refs.hidd.display = "none";
-      this.$refs.hidd1.display = "none";
-    }
-    }
+    displayInformation: function() {
+      isInformationVisible = true;
+      isSettingsVisible = false;
+      isGameVisible = false;
+      isPromotionVisible = false;
+    },
+    displaySettings: function() {
+      isInformationVisible = false;
+      isSettingsVisible = true;
+      isGameVisible = false;
+      isPromotionVisible = false;
+    },
+    displayGame: function() {
+      isInformationVisible = false;
+      isSettingsVisible = false;
+      isGameVisible = true;
+      isPromotionVisible = false;
+    },
+    displayPromotion: function() {
+      isInformationVisible = false;
+      isSettingsVisible = false;
+      isGameVisible = false;
+      isPromotionVisible = true;
+    },
   },
   mounted() {
-    
     axios
       .get("http://localhost:8081/stoom/user/", {
         params: {
