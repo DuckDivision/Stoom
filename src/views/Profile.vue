@@ -25,25 +25,31 @@
                 class="col-span-12 w-full px-3 py-6 justify-center flex space-x-4 md:space-x-0 md:space-y-4 md:flex-col md:col-span-2 md:justify-start"
             >
               <button
-                  class="text-sm p-2 text-center bg-yellow-500"
-                  type="button"
-                  @click="displayInformation"
+
+                class="text-sm p-2 text-center bg-yellow-500"
+                type="button"
+                @click="displayInformation"
+
               >
                 Information
               </button>
               <button
+
                   v-if="isAdmin()"
                   class="text-sm p-2 text-center bg-yellow-500"
                   type="button"
                   @click="displayGame"
+
               >
                 Add new game
               </button>
               <button
+
                   v-if="isAdmin()"
                   class="text-sm p-2 text-center bg-yellow-500"
                   type="button"
                   @click="displayPromotion"
+
               >
                 Promotion
               </button>
@@ -88,6 +94,7 @@ export default {
       isInformationVisible: false,
       isGameVisible: false,
       isPromotionVisible: false,
+
     };
   },
   methods: {
@@ -109,6 +116,7 @@ export default {
     isAdmin() {
       return sessionStorage.getItem('role') == 'ROLE_ADMIN';
     }
+
   },
   mounted() {
     axios
