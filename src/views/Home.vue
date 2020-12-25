@@ -38,7 +38,9 @@
               <span class="text-right pr-2">FREE</span>
               <span class="text-sm">Game by Psyonix</span>
               <router-link to="/gamePage" class="flex flex-row-reverse">
-                <button class="buttonBuy hover:bg-red-700">Buy</button>
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -53,7 +55,9 @@
               <span class="text-right pr-2">499р</span>
               <span class="text-sm">Game by Blizzard</span>
               <router-link to="/gamePage" class="flex flex-row-reverse">
-                <button class="buttonBuy hover:bg-red-700">Buy</button>
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -68,7 +72,9 @@
               <span class="text-right pr-2">1499р</span>
               <span class="text-sm">Game by Microsoft</span>
               <router-link to="/gamePage" class="flex flex-row-reverse">
-                <button class="buttonBuy hover:bg-red-700">Buy</button>
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -83,7 +89,9 @@
               <span class="text-right pr-2">299р</span>
               <span class="text-sm">Game by Ubisoft</span>
               <router-link to="/gamePage" class="flex flex-row-reverse">
-                <button class="buttonBuy hover:bg-red-700">Buy</button>
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -106,7 +114,9 @@
               <span class="text-right pr-2">1999р</span>
               <span class="text-sm">Game by Nintendo</span>
               <router-link to="/gamePage" class="flex flex-row-reverse">
-                <button class="buttonBuy hover:bg-red-700">Buy</button>
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -121,7 +131,9 @@
               <span class="text-right pr-2">FREE</span>
               <span class="text-sm">Game by Psyonix</span>
               <router-link to="/gamePage" class="flex flex-row-reverse">
-                <button class="buttonBuy hover:bg-red-700">Buy</button>
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -136,7 +148,9 @@
               <span class="text-right pr-2">499р</span>
               <span class="text-sm">Game by Blizzard</span>
               <router-link to="/gamePage" class="flex flex-row-reverse">
-                <button class="buttonBuy hover:bg-red-700">Buy</button>
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -153,7 +167,7 @@
               <router-link to="/gamePage" class="flex flex-row-reverse">
                 <button
                   class="buttonBuy hover:bg-red-700"
-                  @click="sessionStorage.setItem('name_game', 'Minecraft 2')"
+                  v-on:click="getGame"
                 >Buy</button>
               </router-link>
             </div>
