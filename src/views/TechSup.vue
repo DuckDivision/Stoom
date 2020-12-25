@@ -29,6 +29,7 @@
         <div class="col-span-2 text-right">
           <button
             class="py-3 px-6 bg-green-500 text-white font-bold w-full sm:w-32"
+            @click="AddToAPI"
           >
             Submit
           </button>
