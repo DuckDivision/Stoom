@@ -14,9 +14,9 @@
             <select class="w-full py-1 px-2 bg-green-300"
             v-model="PromoAdd.namePromo"
             >
-              <option>Mario 64</option>
-              <option>Mario 2</option>
-              <option>Mario Odessey</option>
+              <option>Far Cry 5 Gold Edition</option>
+              <option>3</option>
+              <option>5</option>
             </select>
           </div>
           <div class="w-full">
