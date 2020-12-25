@@ -7,8 +7,6 @@
                     <thead>
                         <tr>
                             <th class="w-1/2 px-4 py-2">Title</th>
-                            <th class="w-1/4 px-4 py-2">Lorem</th>
-                            <th class="w-1/4 px-4 py-2">Hours</th>
                             <th class="w-1/4 px-4 py-2">Play</th>
                         </tr>
                     </thead>
@@ -70,6 +68,8 @@ export default {
         return {
             gameRow: `
                 <td class="border px-4 py-2 name"></td>
+                <td class="border px-4 py-2 lorem"></td>
+                <td class="border px-4 py-2 hours"></td>
                 <td class="border px-4 py-2">
                     <button
                         class="bg-red-500 text-white font-bold py-4 px-2 rounded-full w-32 hover:bg-red-700">Download</button>
@@ -78,7 +78,7 @@ export default {
         }
     },
     mounted(){
-        axios.get("http://localhost:8081/stoom/game/all", /*{
+        axios.get("http://localhost:8081/stoom/game/all"/*, {
                 params: {
                     userID: '24979136-39eb-4b09-acd7-a0765cc7f90f',
                 },
@@ -87,13 +87,12 @@ export default {
                 },
             },
            ,*/
-            (response) => {
-                console.log(response)
-                for(var i = 0; i < response.length; i++) {
+            ).then((response) => {
+                for(var i = 0; i < response.data.length; i++) {
                     var game = document.createElement('tr')
                     game.classList.add("bg-gray-100")
                     game.innerHTML = this.$data.gameRow
-                    game.querySelector('td.name').innerHTML = response[i].gameResTitle;
+                    game.querySelector('td.name').innerHTML = response.data[i].gameResTitle;
                     this.$refs.library.appendChild(game);
                 }
         })
