@@ -7,7 +7,11 @@
 
       <div class="grid grid-cols-2 gap-4 max-w-xl m-auto">
         <div class="col-span-2 lg:col-span-1">
-          <input type="text" class="textBox md:text-xl" placeholder="Sender Name" />
+          <input
+            type="text"
+            class="textBox md:text-xl"
+            placeholder="Sender Name"
+          />
         </div>
         <div class="col-span-2 lg:col-span-1">
           <input
@@ -23,7 +27,7 @@
             rows="8"
             class="textBox md:text-xl"
             placeholder="Cry me a river"
-            v-model="Message.massageText"
+            v-model="Message.messageText"
           ></textarea>
         </div>
         <div class="col-span-2 text-right">
@@ -45,62 +49,54 @@ export default {
   data() {
     return {
       Message: {},
-      Res:{userResName: ""}
+      Res: { userResName: "" },
     };
   },
-  
   methods: {
-    
     AddToAPI() {
+    var senderName = sessionStorage.getItem("user");
+    var recieverName = this.Res.recieverName;
+    var senderID, recieverID;
+    axios
+      .get(
+        "http://localhost:8081/stoom/user/getUserID?userName=" + senderName,
+        {
+          headers: {
+            authorization: sessionStorage.getItem("authoruzation"),
+          },
+        }
+      )
+      .then((response) => {
+        senderID = response.data[0].userResID;
+      });
+    axios
+      .get(
+        "http://localhost:8081/stoom/user/getUserID?userName=" + recieverName,
+        {
+          headers: {
+            authorization: sessionStorage.getItem("authoruzation"),
+          },
+        }
+      )
+      .then((response) => {
+        recieverID = response.data[0].userResID;
+      });
       let Message = {
-        messageRecieverUserID: sessionStorage.getItem('user_rec_id'),
-        messageSenderUserID: sessionStorage.getItem('user_send_id'),
-        messageText: this.Message.messageText
-
-       
+        messageRecieverUserID: recieverID,
+        messageSenderUserID: senderID,
+        messageText: this.Message.messageText,
       };
-      
-      console.log();
       axios
-        .post("http://localhost:8081/stoom/message/", Message,{
-
-        })
-        .then(response => {
+        .post("http://localhost:8081/stoom/message/", Message, {})
+        .then((response) => {
           sessionStorage.setItem(
             "authorization",
             response.headers.authorization
           );
-          
-          
+
           console.log(response);
         });
     },
-    
-
-    
   },
-  mounted(){
-    var userName = sessionStorage.getItem('user')
-    
-    axios.get("http://localhost:8081/stoom/user/getUserID?userName="+ userName,
-    {
-        headers:{
-          authorization: sessionStorage.getItem('authoruzation')
-        }
-    })
-    let Res ={
-      userResName: this.Res.recieverName
-    }
-    .then(response =>{
-      axios.get("http://localhost:8081/stoom/user/getUserID?userName="+ Res,
-      )
-      .then(responce =>{
-        sessionStorage.setItem("user_rec_id", responce.data[0].userResID)
-        console.log(responce)
-      })
-      sessionStorage.setItem("user_send_id", response.data[0].userResID)
-      console.log(response)
-    })
-  }
 };
 </script>
