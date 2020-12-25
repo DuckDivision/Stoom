@@ -78,7 +78,7 @@ export default {
         }
     },
     mounted(){
-        axios.get("http://localhost:8081/stoom/game_user", {
+        axios.get("http://localhost:8081/stoom/games/all", /*{
                 params: {
                     userID: '24979136-39eb-4b09-acd7-a0765cc7f90f',
                 },
@@ -86,6 +86,7 @@ export default {
                     authorization: sessionStorage.getItem("authorization"),
                 },
             },
+           ,*/
             (response) => {
                 console.log(response)
                 for(var i = 0; i < response.length; i++) {
