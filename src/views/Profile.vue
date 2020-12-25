@@ -27,33 +27,30 @@
               <button
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
-                @click="isInformationVisible = !isInformationVisible "
+                @click="displayInformation"
               >
                 Information
               </button>
               <button
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
-                @click="isSettingsVisible = !isSettingsVisible 
-                "
-                
+                @click="displaySettings"
               >
                 Settings
               </button>
               <button
+                v-if="isAdmin()"
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
-                @click="isGameVisible = !isGameVisible
-                "
+                @click="displayGame"
               >
                 Add new game
               </button>
               <button
+                v-if="isAdmin()"
                 class="text-sm p-2 text-center bg-yellow-500"
                 type="button"
-                @click="isPromotionVisible = !isPromotionVisible
-                "
-                
+                @click="displayPromotion"
               >
                 Promotion
               </button>
@@ -98,13 +95,41 @@ export default {
   data() {
     return {
       User: [],
-      isInformationVisible: false,
+      isInformationVisible: true,
       isSettingsVisible: false,
       isGameVisible: false,
-      isPromotionVisible: false
+      isPromotionVisible: false,
     };
   },
-  methods: {},
+  methods: {
+    displayInformation() {
+      this.$data.isInformationVisible = true;
+      this.$data.isSettingsVisible = false;
+      this.$data.isGameVisible = false;
+      this.$data.isPromotionVisible = false;
+    },
+    displaySettings() {
+      this.$data.isInformationVisible = false;
+      this.$data.isSettingsVisible = true;
+      this.$data.isGameVisible = false;
+      this.$data.isPromotionVisible = false;
+    },
+    displayGame() {
+      this.$data.isInformationVisible = false;
+      this.$data.isSettingsVisible = false;
+      this.$data.isGameVisible = true;
+      this.$data.isPromotionVisible = false;
+    },
+    displayPromotion() {
+      this.$data.isInformationVisible = false;
+      this.$data.isSettingsVisible = false;
+      this.$data.isGameVisible = false;
+      this.$data.isPromotionVisible = true;
+    },
+    isAdmin() {
+      return sessionStorage.getItem('role') == 'ROLE_ADMIN';
+    }
+  },
   mounted() {
     axios
       .get("http://localhost:8081/stoom/user/", {
@@ -122,4 +147,3 @@ export default {
   },
 };
 </script>
-
