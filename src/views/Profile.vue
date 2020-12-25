@@ -35,20 +35,23 @@
               </button>
               <button
 
+
                   v-if="isAdmin()"
                   class="text-sm p-2 text-center bg-yellow-500"
                   type="button"
                   @click="displayGame"
+
 
               >
                 Add new game
               </button>
               <button
 
-                  v-if="isAdmin()"
-                  class="text-sm p-2 text-center bg-yellow-500"
-                  type="button"
-                  @click="displayPromotion"
+                v-if="isAdmin()"
+                class="text-sm p-2 text-center bg-yellow-500"
+                type="button"
+                @click="displayPromotion"
+
 
               >
                 Promotion
@@ -100,16 +103,19 @@ export default {
   methods: {
     displayInformation() {
       this.$data.isInformationVisible = true;
+
       this.$data.isGameVisible = false;
       this.$data.isPromotionVisible = false;
     },
     displayGame() {
       this.$data.isInformationVisible = false;
+
       this.$data.isGameVisible = true;
       this.$data.isPromotionVisible = false;
     },
     displayPromotion() {
       this.$data.isInformationVisible = false;
+
       this.$data.isGameVisible = false;
       this.$data.isPromotionVisible = true;
     },
