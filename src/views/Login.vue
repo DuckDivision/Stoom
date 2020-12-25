@@ -55,6 +55,7 @@ export default {
       let User = {
         userPassword: this.User.userPassword,
         userReqName: this.User.userReqName
+        
       };
       console.log(User);
       axios
@@ -65,6 +66,9 @@ export default {
             response.headers.authorization
           );
           sessionStorage.setItem("user", User.userReqName);
+          sessionStorage.setItem("role", response.headers["user-role"]);
+          
+          console.log(response);
         });
     }
   }

@@ -9,9 +9,7 @@
 
       <div>
         <!-- cards go here -->
-        <div
-          class="grid xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 gap-10 text-left py-5"
-        >
+        <div class="grid xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 gap-10 text-left py-5">
           <div class="shadow-xl">
             <img
               src="https://assets1.ignimgs.com/2019/05/31/mario-64---button-1559263987447.jpg"
@@ -19,11 +17,13 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Super Mario 64</span>
+              <span class="text-lg">The Witcher 3 Wild Hunt</span>
               <span class="text-right pr-2">1999р</span>
               <span class="text-sm">Game by Nintendo</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -34,11 +34,13 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Rocket league</span>
+              <span class="text-lg">Call Of Duty Modern Warfare</span>
               <span class="text-right pr-2">FREE</span>
               <span class="text-sm">Game by Psyonix</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -49,11 +51,13 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Starcraft 3</span>
+              <span class="text-lg">Call Of Duty Cold War</span>
               <span class="text-right pr-2">499р</span>
               <span class="text-sm">Game by Blizzard</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -64,11 +68,13 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Minecraft 2</span>
+              <span class="text-lg">Divinity Original Sin 2 Definitive Edition</span>
               <span class="text-right pr-2">1499р</span>
               <span class="text-sm">Game by Microsoft</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -79,11 +85,13 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">For Honor</span>
+              <span class="text-lg">Far Cry 5 Gold Edition</span>
               <span class="text-right pr-2">299р</span>
               <span class="text-sm">Game by Ubisoft</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -94,9 +102,7 @@
 
       <div>
         <!-- cards go here -->
-        <div
-          class="grid xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 gap-10 text-left py-5"
-        >
+        <div class="grid xl:grid-cols-5 md:grid-cols-3 sm:grid-cols-1 gap-10 text-left py-5">
           <div class="shadow-xl">
             <img
               src="https://assets1.ignimgs.com/2019/05/31/mario-64---button-1559263987447.jpg"
@@ -104,11 +110,13 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Super Mario 64</span>
+              <span class="text-lg">Far Cry 5 Gold Edition</span>
               <span class="text-right pr-2">1999р</span>
               <span class="text-sm">Game by Nintendo</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -119,11 +127,13 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Rocket league</span>
+              <span class="text-lg">Far Cry 5 Gold Edition</span>
               <span class="text-right pr-2">FREE</span>
               <span class="text-sm">Game by Psyonix</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -134,11 +144,13 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Starcraft 3</span>
+              <span class="text-lg">Far Cry 5 Gold Edition</span>
               <span class="text-right pr-2">499р</span>
               <span class="text-sm">Game by Blizzard</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button class="buttonBuy hover:bg-red-700"
+                v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -149,11 +161,14 @@
               class="object-cover h-56 w-full"
             />
             <div class="grid grid-cols-2 px-2 py-2">
-              <span class="text-lg">Minecraft 2</span>
+              <span class="text-lg">Far Cry 5 Gold Edition</span>
               <span class="text-right pr-2">1499р</span>
               <span class="text-sm">Game by Microsoft</span>
-              <router-link to="/gamePage" class="flex flex-row-reverse"
-                ><button class="buttonBuy hover:bg-red-700">Buy</button>
+              <router-link to="/gamePage" class="flex flex-row-reverse">
+                <button
+                  class="buttonBuy hover:bg-red-700"
+                  v-on:click="getGame"
+                >Buy</button>
               </router-link>
             </div>
           </div>
@@ -173,5 +188,24 @@
 </template>
 
 <script>
-export default { name: "Home" };
+//import axios from "axios";
+export default {
+  name: "Home",
+  data() {
+    return {};
+  },
+  methods: {
+    getGame: function(e){
+      var clickedElement = e.target;
+      console.log(clickedElement)
+      var addGameName = clickedElement.parentElement.parentElement.querySelector("span.text-lg").innerHTML;
+      console.log(addGameName)
+      sessionStorage.setItem("game_name", addGameName);
+      //this.$router.push({ name: '#/gamePage' })
+      //this.$refs.game_name.innerHTML = addGameName;
+    }
+  },
+    
+  
+};
 </script>
