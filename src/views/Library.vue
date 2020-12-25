@@ -12,7 +12,10 @@
                             <th class="w-1/4 px-4 py-2">Play</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody
+                    ref="library"
+                    >
+<!--
                         <tr>
                             <td class="border px-4 py-2">DOTA 2</td>
                             <td class="border px-4 py-2">Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -51,6 +54,7 @@
                                     class="bg-red-500 text-white font-bold py-4 px-2 rounded-full w-32 hover:bg-red-700">Download</button>
                             </td>
                         </tr>
+-->
                     </tbody>
                 </table>
             </div>
@@ -58,3 +62,40 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from 'axios'
+export default {
+    data() {
+        return {
+            gameRow: `
+                <td class="border px-4 py-2 name"></td>
+                <td class="border px-4 py-2">
+                    <button
+                        class="bg-red-500 text-white font-bold py-4 px-2 rounded-full w-32 hover:bg-red-700">Download</button>
+                </td>
+            `
+        }
+    },
+    mounted(){
+        axios.get("http://localhost:8081/stoom/game_user", {
+                params: {
+                    userID: '24979136-39eb-4b09-acd7-a0765cc7f90f',
+                },
+                headers: {
+                    authorization: sessionStorage.getItem("authorization"),
+                },
+            },
+            (response) => {
+                console.log(response)
+                for(var i = 0; i < response.length; i++) {
+                    var game = document.createElement('tr')
+                    game.classList.add("bg-gray-100")
+                    game.innerHTML = this.$data.gameRow
+                    game.querySelector('td.name').innerHTML = response[i].gameResTitle;
+                    this.$refs.library.appendChild(game);
+                }
+        })
+    }
+}
+</script>
