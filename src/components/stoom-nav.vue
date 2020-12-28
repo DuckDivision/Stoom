@@ -26,11 +26,12 @@
       >
         <router-link to="/">Store</router-link>
         <router-link to="/Library">Library</router-link>
-        <router-link to="/Profile">Profile</router-link>
         <router-link to="/TechSup">Help</router-link>
         <div class="divide-x-2 divide-gray-800">
-          <router-link to="/Login" class="px-10">Login</router-link>
-          <router-link to="/SignUp" class="px-10">SignUp</router-link>
+          <router-link v-if="!isLoggedIn()" to="/Login" class="px-10">Login</router-link>
+          <router-link v-if="!isLoggedIn()" to="/SignUp" class="px-10">SignUp</router-link>
+          <router-link v-if="isLoggedIn()" to="/Profile">Profile</router-link>
+          <a @click="logout" v-if="isLoggedIn()">Logout</a>
         </div>
       </div>
       <!--Navigation menu-->
@@ -57,19 +58,27 @@
             <router-link to="/Library" class="px-2 hover:bg-blue-500"
               >Library</router-link
             >
-            <router-link to="/Profile" class="px-2 hover:bg-blue-500"
-              >Profile</router-link
-            >
             <router-link to="/TechSup" class="px-2 hover:bg-blue-500"
               >Tech support</router-link
             >
           </div>
           <div class="flex divide-x-2 divide-gray-800">
             <router-link to="/Login" class="px-2 hover:bg-blue-500"
+              v-if="!isLoggedIn()"
               >Login</router-link
             >
             <router-link to="/SignUp" class="px-2 hover:bg-blue-500"
+              v-if="!isLoggedIn()"
               >SignUp</router-link
+            >
+            <router-link to="/Profile" class="px-2 hover:bg-blue-500"
+              v-if="isLoggedIn()"
+              >Profile</router-link
+            >
+            <a class="px-2 hover:bg-blue-500"
+              v-if="isLoggedIn()"
+              @click="logout"
+              >Logout</a
             >
           </div>
         </div>
@@ -88,6 +97,15 @@ export default {
       isVisible: false,
     };
   },
-  methods: {},
+  methods: {
+    isLoggedIn: function() {
+      return sessionStorage.getItem('role') != null;
+    },
+    logout: function() {
+        sessionStorage.clear();
+        this.$forceUpdate();
+        this.$router.push('/');
+    }
+  },
 };
 </script>
