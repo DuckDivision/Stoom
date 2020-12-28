@@ -78,7 +78,11 @@ export default {
         }
     },
     mounted(){
+<<<<<<< HEAD
         axios.get("http://localhost:8081/stoom/game/all"/*, {
+=======
+        axios.get("http://localhost:8081/stoom/game_user/", {
+>>>>>>> night
                 params: {
                     userID: '24979136-39eb-4b09-acd7-a0765cc7f90f',
                 },
@@ -86,8 +90,14 @@ export default {
                     authorization: sessionStorage.getItem("authorization"),
                 },
             },
+<<<<<<< HEAD
            ,*/
             ).then((response) => {
+=======
+           
+            ).then((response) => {
+            
+>>>>>>> night
                 for(var i = 0; i < response.data.length; i++) {
                     var game = document.createElement('tr')
                     game.classList.add("bg-gray-100")
