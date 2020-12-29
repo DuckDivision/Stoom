@@ -91,50 +91,30 @@ export default {
   data() {
     return {
       User: [],
-      isInformationVisible: false,
+      isInformationVisible:true,
       isGameVisible: false,
       isPromotionVisible: false,
-<<<<<<< HEAD
-
-=======
->>>>>>> night
     };
   },
   methods: {
     displayInformation() {
       this.$data.isInformationVisible = true;
-<<<<<<< HEAD
-
-=======
->>>>>>> night
       this.$data.isGameVisible = false;
       this.$data.isPromotionVisible = false;
     },
     displayGame() {
       this.$data.isInformationVisible = false;
-<<<<<<< HEAD
-
-=======
->>>>>>> night
       this.$data.isGameVisible = true;
       this.$data.isPromotionVisible = false;
     },
     displayPromotion() {
       this.$data.isInformationVisible = false;
-<<<<<<< HEAD
-
-=======
->>>>>>> night
       this.$data.isGameVisible = false;
       this.$data.isPromotionVisible = true;
     },
     isAdmin() {
       return sessionStorage.getItem('role') == 'ROLE_ADMIN';
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> night
   },
   mounted() {
     axios
@@ -152,8 +132,4 @@ export default {
         });
   },
 };
-<<<<<<< HEAD
 </script>
-=======
-</script>
->>>>>>> night
