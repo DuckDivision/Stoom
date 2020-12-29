@@ -1,25 +1,11 @@
 <template>
   <div class="techSup">
     <div class="max-w-2xl py-10 px-5 m-auto">
-      <div class="text-3xl mb-6 text-center">
-        We'll never help you, don't try it
-      </div>
+      <div class="text-3xl mb-6 text-center">We'll never help you, don't try it</div>
 
       <div class="grid grid-cols-2 gap-4 max-w-xl m-auto">
-        <div class="col-span-2 lg:col-span-1">
-          <input
-            type="text"
-            class="textBox md:text-xl"
-            placeholder="Sender Name"
-          />
-        </div>
-        <div class="col-span-2 lg:col-span-1">
-          <input
-            type="text"
-            class="textBox md:text-xl"
-            placeholder="Reciever Name"
-            v-model="Res.recieverName"
-          />
+        <div class="w-full py-1 px-2 bg-blue-100">
+          <p style="color:#000000">Sensei listen you</p>
         </div>
         <div class="col-span-2">
           <textarea
@@ -33,10 +19,8 @@
         <div class="col-span-2 text-right">
           <button
             class="py-3 px-6 bg-green-500 text-white font-bold w-full sm:w-32"
-            @click="AddToAPI"
-          >
-            Submit
-          </button>
+            @click="AddMess"
+          >Submit</button>
         </div>
       </div>
     </div>
@@ -45,58 +29,69 @@
 
 <script>
 import axios from "axios";
+var senderID;
+var recieverID = "793cf14b-a2c8-4fff-910d-1fbca4e09127";
 export default {
   data() {
     return {
       Message: {},
-      Res: { userResName: "" },
+      Res: {}
     };
   },
   methods: {
-    AddToAPI() {
-    var senderName = sessionStorage.getItem("user");
-    var recieverName = this.Res.recieverName;
-    var senderID, recieverID;
-    axios
-      .get(
-        "http://localhost:8081/stoom/user/getUserID?userName=" + senderName,
-        {
-          headers: {
-            authorization: sessionStorage.getItem("authoruzation"),
-          },
-        }
-      )
-      .then((response) => {
-        senderID = response.data[0].userResID;
-      });
-    axios
-      .get(
-        "http://localhost:8081/stoom/user/getUserID?userName=" + recieverName,
-        {
-          headers: {
-            authorization: sessionStorage.getItem("authoruzation"),
-          },
-        }
-      )
-      .then((response) => {
-        recieverID = response.data[0].userResID;
-      });
+    AddMess() {
       let Message = {
         messageRecieverUserID: recieverID,
         messageSenderUserID: senderID,
-        messageText: this.Message.messageText,
+        messageText: this.Message.messageText
       };
+      console.log(recieverID, senderID, this.Message.messageText);
       axios
-        .post("http://localhost:8081/stoom/message/", Message, {})
-        .then((response) => {
-          sessionStorage.setItem(
-            "authorization",
-            response.headers.authorization
-          );
-
-          console.log(response);
+        .post("http://localhost:8081/stoom/message/", Message, {
+          headers: {
+            authorization: sessionStorage.getItem("authorization")
+          }
+        })
+        .then(responze => {
+          console.log(responze);
         });
-    },
+    }
   },
+  mounted() {
+    var senderName = sessionStorage.getItem("user");
+
+    //var recieverName = "f";
+    console.log("??");
+    console.log(senderName);
+
+    axios
+      .get("http://localhost:8081/stoom/user/getUserID", {
+        params: {
+          userName: sessionStorage.getItem("user")
+        },
+        headers: {
+          authorization: sessionStorage.getItem("authorization")
+        }
+      })
+      .then(response => {
+        senderID = response.data.userResID;
+        console.log(senderID);
+
+        //axios
+        /*.get(
+        "http://localhost:8081/stoom/user/getUserID" + recieverName,
+        {
+          headers: {
+            authorization: sessionStorage.getItem("authoruzation"),
+          },
+        }
+      )
+      .then((responce) => {
+        recieverID = responce.data[0].userResID;
+        console.log(recieverID);
+        
+      });*/
+      });
+  }
 };
 </script>
