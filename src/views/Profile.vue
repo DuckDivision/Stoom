@@ -35,20 +35,23 @@
               </button>
               <button
 
+
                   v-if="isAdmin()"
                   class="text-sm p-2 text-center bg-yellow-500"
                   type="button"
                   @click="displayGame"
+
 
               >
                 Add new game
               </button>
               <button
 
-                  v-if="isAdmin()"
-                  class="text-sm p-2 text-center bg-yellow-500"
-                  type="button"
-                  @click="displayPromotion"
+                v-if="isAdmin()"
+                class="text-sm p-2 text-center bg-yellow-500"
+                type="button"
+                @click="displayPromotion"
+
 
               >
                 Promotion
@@ -78,9 +81,6 @@ import stoomProfileInformation from '../components/stoom-profile-information.vue
 import stoomProfileAddGame from "../components/stoom-profile-add-game";
 import stoomProfileAddPromotion from "../components/stoom-profile-add-promotion";
 import axios from "axios";
-
-
-
 export default {
   name: "profile",
   components: {
@@ -91,10 +91,9 @@ export default {
   data() {
     return {
       User: [],
-      isInformationVisible: false,
+      isInformationVisible:true,
       isGameVisible: false,
       isPromotionVisible: false,
-
     };
   },
   methods: {
@@ -116,7 +115,6 @@ export default {
     isAdmin() {
       return sessionStorage.getItem('role') == 'ROLE_ADMIN';
     }
-
   },
   mounted() {
     axios

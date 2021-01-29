@@ -67,10 +67,12 @@ export default {
           );
           sessionStorage.setItem("user", User.userReqName);
           sessionStorage.setItem("role", response.headers["user-role"]);
-          
+          this.$forceUpdate();
           console.log(response);
         });
     }
   }
+
 };
+
 </script>

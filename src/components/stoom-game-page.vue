@@ -5,12 +5,12 @@
         <img
           alt="gameImage"
           class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200"
-          src=""
+          v-bind:src="game.image"
           ref="img"
         />
         <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
           <h2 class="text-sm tracking-widest">BRAND NAME</h2>
-          <h1 class="text-gray-900 text-3xl mb-1" ref="game_name">jfkrhgjk</h1>
+          <h1 class="text-gray-900 text-3xl mb-1" ref="game_name">{{game.name}}</h1>
           <div class="flex mb-4">
             <span class="flex items-center">
               <svg
@@ -83,7 +83,7 @@
           </div>
           <p class="leading-relaxed">good game</p>
           <div class="flex py-8">
-            <span class="title-font font-medium text-2xl" ref="price">$69.99</span>
+            <span class="title-font font-medium text-2xl" ref="price">{{game.price}} руб.</span>
             <button
               class="flex ml-auto buttonBuy items-center justify-center hover:bg-red-700"
               @click="buyGame"
@@ -133,6 +133,7 @@ export default {
   props: {},
   data() {
     return {
+      game: { name: undefined, price: undefined },
       Game: { gameRate: "", gameReview: "" }
     };
   },
@@ -161,26 +162,57 @@ export default {
         });
     },
     buyGame: function() {
-      //console.log("hello");
-      let bGame = {
-        reviewGameID: sessionStorage.getItem("game_id"),
-        reviewUserID: userID
-      };
+      console.log("hello");
       axios
-        .post("http://localhost:8081/stoom/game_user/", bGame, {
+        .get("http://localhost:8081/stoom/user/", {
+          params : {
+              userName: sessionStorage.getItem("user")
+          },
           headers: {
             authorization: sessionStorage.getItem("authorization")
           }
         })
         .then(response => {
-          console.log(response);
+            let userKey = response.data[0].userResID;
+             axios
+              .post("http://localhost:8081/stoom/game_user/", 
+              {
+                reviewGameID: sessionStorage.getItem("game_id"),
+                reviewUserID: userKey
+              }, 
+              {
+                headers: {
+                    authorization: sessionStorage.getItem("authorization")
+                }
+              })
+            .then(response => {
+              console.log(response);
+            });
         });
+     /*axios
+        .post("http://localhost:8081/stoom/game_user", bGame, {
+          headers: {
+            authorization: sessionStorage.getItem("authorization")
+          }
+        })
+        .then(response => {
+          let url = response.data.gameResURL;
+          var dummyLink = document.createElement("a");
+          dummyLink.href = url;
+          dummyLink.id = 'dummyLink';
+          console.log(url);
+          document.body.appendChild(dummyLink);
+          dummyLink.click();
+          document.body.removeChild(dummyLink);
+        });*/
     }
   },
   mounted() {
+    let ref = this
+    gameName = sessionStorage.getItem('game_name');
     axios
       .get(
-        "http://localhost:8081/stoom/game/getGameByTitle?gameTitle=" + gameName,
+        "http://localhost:8081/stoom/game/getGameByTitle?gameTitle=" + encodeURI(gameName),
         {}
       )
       .then(response => {
@@ -195,19 +227,21 @@ export default {
           })
           .then(responce => {
             userID = responce;
-            console.log(userID);
-            console.log(responce);
+            //console.log(userID);
+            //console.log(responce);
             userID = responce.data.userResID;
           });
-        console.log(response.data);
         this.User = response.data[0];
         sessionStorage.setItem("price", response.data[0].gameResPrice);
         sessionStorage.setItem("game_id", response.data[0].gameResID);
+        ref.game.name = response.data[0].gameResTitle;
+        ref.game.price = response.data[0].gameResPrice;
+        ref.game.image = response.data[0].gameResURL;
         //sessionStorage.setItem('img', response.data[0].gameResURL)
-        this.$refs.game_name.innerHTML = sessionStorage.getItem("game_name");
-        this.$refs.price.innerHTML = sessionStorage.getItem("price");
-        this.$refs.img.src = response.data[0].gameResURL;
-        console.log(response);
+        //this.$refs.game_name.innerHTML = sessionStorage.getItem("game_name");
+        //this.$refs.price.innerHTML = sessionStorage.getItem("price");
+        //this.$refs.img.src = response.data[0].gameResURL;
+        //console.log(response);
       });
   }
 };

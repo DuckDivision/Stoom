@@ -11,31 +11,28 @@
           </div>
           <div>
             <label class="text-xl">Name of the game</label>
-            <input type="text" class="w-full py-1 px-2 bg-red-200" />
+            <input type="text" class="w-full py-1 px-2 bg-red-200"
+            v-model="GameAdd.nameGame"
+             />
           </div>
           <div class="w-full">
-            <label class="text-xl">Company name</label>
-            <input type="text" class="w-full py-1 px-2 bg-red-200" />
+            <label class="text-xl">Price</label>
+            <input type="text" class="w-full py-1 px-2 bg-red-200"
+            v-model="GameAdd.priceGame"
+             />
           </div>
-          <div class="w-full">
-            <label class="text-xl">Game link</label>
-            <input type="text" class="w-full py-1 px-2 bg-red-200" />
-          </div>
+          
           <div class="w-full">
             <label class="text-xl">Game image</label>
-            <input type="text" class="w-full py-1 px-2 bg-red-200" />
+            <input type="text" class="w-full py-1 px-2 bg-red-200" 
+            v-model="GameAdd.URLGame"
+            />
           </div>
-          <div>
-            <h3 class="text-2xl">Describe the game</h3>
-            <hr />
-          </div>
-          <div class="w-full">
-            <textarea cols="30" rows="10" class="w-full py-1 px-2 bg-red-200">
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem natus nobis odio. Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium, eveniet fugiat? Explicabo assumenda dignissimos quisquam perspiciatis corporis sint commodi cumque rem tempora!</textarea
-            >
-          </div>
+          
           <div class="pt-4 flex justify-center">
-            <button class="w-64 bg-red-300 px-2 py-1" type="submit">
+            <button class="w-64 bg-red-300 px-2 py-1" type="submit"
+            @click="AddGame"
+            >
               SUBMITT THE GAME
             </button>
           </div>
@@ -46,9 +43,36 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem natus nobis odi
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "stoom-profile-add-game",
-  props: {},
-  methods: {},
+  data() {
+    return {
+      GameAdd: {  }
+    };
+  },
+
+  methods: {
+    AddGame() {
+      let GameAdd = {
+        gameReqPrice: this.GameAdd.priceGame,
+        gameReqTitle: this.GameAdd.nameGame,
+        gameReqURL: this.GameAdd.URLGame
+        
+      };
+      console.log(GameAdd);
+      axios
+        .post("http://localhost:8081/stoom/game/", GameAdd,
+        {
+          headers:{
+            authorization: sessionStorage.getItem('authorization')
+          }
+        }
+        )
+        .then(response => {
+          
+          console.log(response);
+        });
+    }
+  }
 };
 </script>
