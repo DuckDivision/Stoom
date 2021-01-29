@@ -1,5 +1,16 @@
 <template>
   <div class="techSup">
+    <div class="techSupMessages">
+    <h2 class="max-w-xl py-3 px-5 m-auto text-2xl">Message history: </h2>
+    <ul class="max-w-xl py-5 px-5 m-auto bg-blue-100" style="overflow-y: auto; max-height: 400px">
+      <li v-for="message in messages" v-bind:key="message.messageResID">
+          <b v-if="message.messageResSenderUser == user">{{message.messageResSenderUser}}:</b> 
+          <b v-else><i>you:</i></b> 
+          {{message.messageResText}}
+          <br>
+        </li>
+      </ul>
+    </div>
     <div class="max-w-2xl py-10 px-5 m-auto">
       <div class="text-3xl mb-6 text-center">We'll never help you, don't try it</div>
 
@@ -28,14 +39,17 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios";  
 var senderID;
 var recieverID = "793cf14b-a2c8-4fff-910d-1fbca4e09127";
 export default {
+  components: { },
   data() {
     return {
       Message: {},
-      Res: {}
+      Res: {},
+      messages: undefined,
+      user: sessionStorage.getItem('user')
     };
   },
   methods: {
@@ -76,22 +90,29 @@ export default {
       .then(response => {
         senderID = response.data.userResID;
         console.log(senderID);
-
-        //axios
-        /*.get(
-        "http://localhost:8081/stoom/user/getUserID" + recieverName,
-        {
-          headers: {
-            authorization: sessionStorage.getItem("authoruzation"),
-          },
-        }
-      )
-      .then((responce) => {
-        recieverID = responce.data[0].userResID;
-        console.log(recieverID);
-        
-      });*/
       });
+      axios.get("http://localhost:8081/stoom/user/", {
+            params : {
+                userName: sessionStorage.getItem("user")
+            },
+            headers: {
+                authorization: sessionStorage.getItem("authorization")
+            }
+        })
+        .then(response => {
+            let userKey = response.data[0].userResID;
+            axios.get("http://localhost:8081/stoom/message/", {
+                params : {
+                    userID: userKey
+                },
+                headers: {
+                    authorization: sessionStorage.getItem("authorization")
+                }
+            })
+            .then(response => {
+                this.messages = response.data.reverse()     
+             });
+        });
   }
 };
 </script>
